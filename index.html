@@ -631,19 +631,143 @@
   .success-state h3 { color: var(--green); margin-bottom: 8px; }
   .success-state p { color: var(--muted); font-size: 14px; line-height: 1.6; }
 
-  /* === RESPONSIVE === */
+  /* === DESKTOP (1024px+) === */
+  @media (min-width: 1024px) {
+    .hero { padding: 80px 40px 60px; }
+    .hero h1 { font-size: 48px; }
+    .hero h2 { font-size: 22px; }
+    .hero p { font-size: 17px; max-width: 620px; }
+    .hero-stats { gap: 56px; }
+    .hero-stat strong { font-size: 32px; }
+    .section-block { padding: 56px 40px; }
+    .section-inner { max-width: 960px; }
+    .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .step-header { margin-bottom: 24px; }
+    .step-title { font-size: 24px; }
+    .step-number { width: 48px; height: 48px; font-size: 18px; border-radius: 16px; }
+    .card { padding: 22px 24px; }
+    .card-name { font-size: 16px; }
+    .card-desc { font-size: 13px; }
+    .card-price { font-size: 17px; }
+    .cart-summary { padding: 18px 32px; margin: 0 40px; }
+    .cart-summary-block .amt { font-size: 22px; }
+    .cart-drawer-content { padding: 24px 32px; }
+    .discount-marquee-wrap { max-width: 960px; }
+    .modal { max-width: 520px; padding: 40px 36px; }
+    .bottom-spacer { height: 180px; }
+  }
+
+  /* Széles desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .section-inner { max-width: 1080px; }
+    .cards-grid { grid-template-columns: repeat(4, 1fr); }
+    .hero { padding: 100px 40px 70px; }
+    .discount-marquee-wrap { max-width: 1080px; }
+  }
+
+  /* === TABLET (601px - 1023px) === */
+  @media (min-width: 601px) and (max-width: 1023px) {
+    .hero { padding: 52px 24px 40px; }
+    .hero h1 { font-size: 36px; }
+    .hero h2 { font-size: 18px; }
+    .hero p { font-size: 16px; }
+    .hero-stats { gap: 36px; }
+    .hero-stat strong { font-size: 26px; }
+    .section-block { padding: 44px 24px; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .step-title { font-size: 21px; }
+    .cart-summary { margin: 0 20px; padding: 16px 24px; }
+    .cart-drawer-content { padding: 20px 24px; }
+    .modal { max-width: 460px; }
+    .discount-marquee-wrap { max-width: 900px; }
+    .bottom-spacer { height: 170px; }
+  }
+
+  /* === MOBIL (max 600px) === */
   @media (max-width: 600px) {
-    .hero { padding: 40px 16px 28px; }
+    .hero { padding: 36px 16px 28px; }
     .hero h1 { font-size: 24px; }
-    .hero h2 { font-size: 15px; }
-    .cards-grid { grid-template-columns: 1fr; }
-    .cart-summary { flex-direction: column; text-align: center; margin: 0 10px; padding: 14px 16px; }
-    .cart-summary-left { justify-content: center; }
-    .cta-btn { width: 100%; }
-    .modal { padding: 28px 20px; }
-    .section-block { padding: 36px 16px; }
-    .cart-drawer-content { padding: 16px; }
-    .cart-summary-prices { gap: 16px; }
+    .hero h2 { font-size: 14px; margin-bottom: 14px; }
+    .hero p { font-size: 14px; margin-bottom: 22px; }
+    .hero-stats { gap: 20px; }
+    .hero-stat strong { font-size: 22px; }
+    .hero-stat span { font-size: 11px; }
+    .hero-badge { font-size: 11px; padding: 5px 14px; }
+
+    .section-block { padding: 32px 14px; }
+    .step-header { margin-bottom: 14px; gap: 10px; }
+    .step-number { width: 36px; height: 36px; font-size: 14px; border-radius: 10px; }
+    .step-title { font-size: 17px; }
+    .step-subtitle { font-size: 11px; }
+
+    .cards-grid { grid-template-columns: 1fr; gap: 10px; }
+    .card { padding: 14px 16px; }
+    .card-icon { font-size: 22px; margin-bottom: 6px; }
+    .card-name { font-size: 14px; }
+    .card-desc { font-size: 11px; margin-bottom: 8px; }
+    .card-price { font-size: 15px; }
+
+    .discount-marquee-wrap { margin: 0; border-radius: 0; }
+    .discount-item { padding: 0 18px; font-size: 13px; }
+    .discount-item .pct { font-size: 16px; }
+
+    /* Kosár — mobil */
+    .cart-summary {
+      flex-direction: column;
+      text-align: center;
+      margin: 0 8px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      gap: 12px;
+    }
+    .cart-summary-left {
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+    }
+    .cart-toggle { font-size: 12px; padding: 7px 12px; }
+    .cart-summary-prices { gap: 14px; }
+    .cart-summary-block .amt { font-size: 18px; }
+    .cart-summary-block .amt.monthly { font-size: 14px; }
+    .cart-summary-block label { font-size: 9px; }
+    .summary-discount-line { font-size: 10px; }
+    .cta-btn { width: 100%; padding: 14px 20px; font-size: 14px; }
+    .cart-drawer-content { padding: 14px; }
+    .cart-drawer-title { font-size: 14px; }
+    .cart-item { font-size: 12px; padding: 6px 0; }
+    .cart-item-price { font-size: 12px; }
+    .cart-total-row.netto .value { font-size: 18px; }
+    .cart-total-row.brutto .value { font-size: 14px; }
+
+    /* Modal — mobil */
+    .modal {
+      padding: 24px 18px;
+      max-width: 100%;
+      margin: 10px;
+      border-radius: 14px;
+    }
+    .modal h3 { font-size: 19px; }
+    .modal .modal-subtitle { font-size: 12px; }
+    .modal-price-summary { padding: 10px 12px; flex-direction: column; gap: 8px; text-align: center; }
+    .modal-price-summary .price-val { font-size: 18px; }
+    .form-group input { padding: 10px 14px; font-size: 14px; }
+    .form-group label { font-size: 12px; }
+    .checkbox-group label { font-size: 11px; }
+    .submit-btn { font-size: 14px; padding: 14px; }
+
+    .social-proof-section p { font-size: 11px; }
+    .bottom-spacer { height: 200px; }
+  }
+
+  /* Kis mobil (max 380px) */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 20px; }
+    .hero h2 { font-size: 13px; }
+    .hero-stat strong { font-size: 20px; }
+    .hero-stats { gap: 16px; }
+    .card-price { font-size: 14px; }
+    .cart-summary-block .amt { font-size: 16px; }
+    .step-title { font-size: 15px; }
   }
 </style>
 </head>
