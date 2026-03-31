@@ -19,8 +19,8 @@
     --green: #10B981;
     --radius: 16px;
     --radius-sm: 10px;
-    --shadow: 0 4px 24px rgba(124, 58, 237, 0.10);
-    --shadow-hover: 0 8px 40px rgba(124, 58, 237, 0.18);
+    --shadow: 0 4px 24px rgba(124,58,237,0.10);
+    --shadow-hover: 0 8px 40px rgba(124,58,237,0.18);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -63,17 +63,24 @@
   .hero h1 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
-    font-size: clamp(28px, 5vw, 48px);
+    font-size: clamp(26px, 5vw, 46px);
     line-height: 1.15;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     background: linear-gradient(135deg, var(--white) 0%, var(--primary-light) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  .hero h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
   .hero p {
     color: var(--muted);
-    font-size: 17px;
-    max-width: 600px;
+    font-size: 16px;
+    max-width: 580px;
     margin: 0 auto 30px;
     line-height: 1.6;
   }
@@ -87,6 +94,77 @@
     color: var(--secondary);
   }
   .hero-stat span { font-size: 13px; color: var(--muted); }
+
+  /* ÁFA BADGE */
+  .vat-notice {
+    text-align: center;
+    padding: 10px 20px;
+    background: rgba(245,158,11,0.08);
+    border-bottom: 1px solid rgba(245,158,11,0.15);
+    font-size: 13px;
+    color: var(--secondary);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  /* KEDVEZMÉNY MARQUEE */
+  .discount-marquee-wrap {
+    overflow: hidden;
+    background: linear-gradient(90deg, #7C3AED, #A78BFA, #F59E0B, #FBBF24, #10B981, #7C3AED);
+    background-size: 300% 100%;
+    animation: marquee-bg 6s linear infinite;
+    padding: 2px 0;
+    margin-bottom: 28px;
+    border-radius: var(--radius-sm);
+  }
+  @keyframes marquee-bg {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+  .discount-marquee-inner {
+    background: var(--dark);
+    border-radius: 8px;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .discount-marquee {
+    display: flex;
+    animation: marquee-scroll 20s linear infinite;
+    white-space: nowrap;
+    padding: 14px 0;
+  }
+  .discount-marquee:hover {
+    animation-play-state: paused;
+  }
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .discount-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 28px;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .discount-item .pct {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+  }
+  .discount-item .label { color: var(--muted); }
+  .discount-sep {
+    color: rgba(124,58,237,0.3);
+    padding: 0 4px;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
 
   /* KONFIGURÁTOR */
   .configurator { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
@@ -154,6 +232,7 @@
     font-weight: 700; font-size: 16px;
     color: var(--secondary);
   }
+  .card-price .vat { font-size: 11px; font-weight: 500; color: var(--muted); }
   .card-price.free { color: var(--green); }
   .card-price small { font-size: 11px; font-weight: 500; color: var(--muted); }
 
@@ -213,6 +292,11 @@
   .summary-block .amount.onetime { color: var(--secondary); }
   .summary-block .amount.monthly { color: var(--primary-light); }
   .summary-block .amount small { font-size: 14px; font-weight: 600; }
+  .summary-vat {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 1px;
+  }
   .summary-discount {
     font-size: 12px;
     color: var(--green);
@@ -237,43 +321,230 @@
     box-shadow: 0 8px 24px rgba(124,58,237,0.4);
   }
 
-  .discount-banner {
-    background: rgba(16,185,129,0.08);
-    border: 1px solid rgba(16,185,129,0.2);
-    border-radius: var(--radius-sm);
-    padding: 14px 20px;
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 13px;
-    color: var(--green);
-    flex-wrap: wrap;
-  }
-  .discount-banner strong { color: var(--green); }
-
   .social-proof { text-align: center; padding: 20px; margin-bottom: 20px; }
   .social-proof p { font-size: 13px; color: var(--muted); }
   .social-proof strong { color: var(--white); }
 
   .bottom-spacer { height: 140px; }
 
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--dark-card);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 22px;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+  }
+  .modal-close:hover { color: var(--white); }
+  .modal h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .modal .modal-subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--white);
+  }
+  .form-group label .req { color: #EF4444; }
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="tel"] {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--dark);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus {
+    border-color: var(--primary);
+  }
+  .form-group input::placeholder {
+    color: rgba(156,163,175,0.5);
+  }
+  .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .checkbox-group input[type="checkbox"] {
+    margin-top: 3px;
+    accent-color: var(--primary);
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .checkbox-group label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    cursor: pointer;
+  }
+  .checkbox-group label a {
+    color: var(--primary-light);
+    text-decoration: underline;
+  }
+  .modal-selected {
+    background: var(--dark);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  .modal-selected-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .modal-selected-list {
+    font-size: 12px;
+    color: var(--white);
+    line-height: 1.7;
+  }
+  .modal-price-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(124,58,237,0.08);
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  .modal-price-summary .price-label {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .modal-price-summary .price-val {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--secondary);
+  }
+  .modal-price-summary .price-vat {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .submit-btn.enabled {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .submit-btn.enabled:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124,58,237,0.4);
+  }
+  .form-error {
+    font-size: 11px;
+    color: #EF4444;
+    margin-top: 4px;
+    display: none;
+  }
+  .success-state {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .success-state .check-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--green), #059669);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 16px;
+  }
+  .success-state h3 {
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .success-state p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
   @media (max-width: 600px) {
     .hero { padding: 40px 16px 28px; }
-    .hero h1 { font-size: 26px; }
+    .hero h1 { font-size: 24px; }
+    .hero h2 { font-size: 15px; }
     .cards-grid { grid-template-columns: 1fr; }
     .summary-inner { flex-direction: column; text-align: center; }
     .summary-prices { justify-content: center; }
     .cta-btn { width: 100%; }
+    .modal { padding: 28px 20px; }
   }
 </style>
 </head>
 <body>
 
+<!-- ÁFA JELZÉS -->
+<div class="vat-notice">Az feltüntetett árak nettó árak + 27% ÁFA</div>
+
 <!-- HERO -->
 <section class="hero">
   <span class="hero-badge">Scroll Digital konfigurátor</span>
-  <h1>Építsd fel a weboldalad — darabról darabra</h1>
+  <h1>Spórolj és digitalizálj</h1>
+  <h2>Állítsd össze a jövőd vállalkozásának digitális alapját</h2>
   <p>Válaszd ki, mire van szükséged, és azonnal lásd a becsült árat. Nincs rejtett költség, nincs meglepetés.</p>
   <div class="hero-stats">
     <div class="hero-stat"><strong>150+</strong><span>elkészült projekt</span></div>
@@ -285,10 +556,32 @@
 <!-- KONFIGURÁTOR -->
 <div class="configurator">
 
-  <!-- KEDVEZMÉNY SÁVI -->
-  <div class="discount-banner">
-    <span style="font-size:18px">&#128161;</span>
-    <span>Minél többet választasz, annál jobban megéri: <strong>3+ modul: -5%</strong> &middot; <strong>5+ modul: -10%</strong> &middot; <strong>8+ modul: -15%</strong> &middot; Éves retainer: <strong>-20%</strong></span>
+  <!-- ANIMÁLT KEDVEZMÉNY MARQUEE -->
+  <div class="discount-marquee-wrap">
+    <div class="discount-marquee-inner">
+      <div class="discount-marquee" id="marquee">
+        <div class="discount-item"><span class="pct">-5%</span><span class="label">3+ modul</span></div>
+        <span class="discount-sep">&#10070;</span>
+        <div class="discount-item"><span class="pct">-10%</span><span class="label">5+ modul</span></div>
+        <span class="discount-sep">&#10070;</span>
+        <div class="discount-item"><span class="pct">-15%</span><span class="label">8+ modul</span></div>
+        <span class="discount-sep">&#10070;</span>
+        <div class="discount-item"><span class="pct">-5%</span><span class="label">kombó (web + retainer)</span></div>
+        <span class="discount-sep">&#10070;</span>
+        <div class="discount-item"><span class="pct">-20%</span><span class="label">éves retainer</span></div>
+        <span class="discount-sep">&#10070;</span>
+        <div class="discount-item"><span class="pct">-5%</span><span class="label">3+ modul</span></div>
+        <span class="discount-sep">&#10070;</span>
+        <div class="discount-item"><span class="pct">-10%</span><span class="label">5+ modul</span></div>
+        <span class="discount-sep">&#10070;</span>
+        <div class="discount-item"><span class="pct">-15%</span><span class="label">8+ modul</span></div>
+        <span class="discount-sep">&#10070;</span>
+        <div class="discount-item"><span class="pct">-5%</span><span class="label">kombó (web + retainer)</span></div>
+        <span class="discount-sep">&#10070;</span>
+        <div class="discount-item"><span class="pct">-20%</span><span class="label">éves retainer</span></div>
+        <span class="discount-sep">&#10070;</span>
+      </div>
+    </div>
   </div>
 
   <!-- 1. ALAP STRUKTÚRA -->
@@ -303,25 +596,25 @@
         <span class="card-icon">&#128196;</span>
         <div class="card-name">Landing page</div>
         <div class="card-desc">Hero szekció: headline + CTA + háttér. A leggyorsabb belépő.</div>
-        <div class="card-price">100 000 Ft</div>
+        <div class="card-price">100 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="180000" data-name="Standard landing (5-8 szekció)" onclick="selectRadio(this)">
         <span class="card-icon">&#128203;</span>
         <div class="card-name">Standard landing</div>
         <div class="card-desc">5-8 szekciós single-page: szolgáltatások, rólunk, GYIK, vélemények, CTA.</div>
-        <div class="card-price">150 000 – 220 000 Ft</div>
+        <div class="card-price">150 000 – 220 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="320000" data-name="Bemutatkozó oldal (3-5 oldal)" onclick="selectRadio(this)">
         <span class="card-icon">&#127970;</span>
         <div class="card-name">Bemutatkozó oldal</div>
         <div class="card-desc">3-5 aloldal: Főoldal + Rólunk + Szolgáltatások + Kapcsolat + 1 extra.</div>
-        <div class="card-price">250 000 – 400 000 Ft</div>
+        <div class="card-price">250 000 – 400 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="700000" data-name="Céges oldal (5-10 oldal)" onclick="selectRadio(this)">
         <span class="card-icon">&#127963;</span>
         <div class="card-name">Céges oldal</div>
         <div class="card-desc">5-10 aloldalas teljes céges jelenlét, minden szekció és funkció.</div>
-        <div class="card-price">500 000 – 900 000 Ft</div>
+        <div class="card-price">500 000 – 900 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
     </div>
   </div>
@@ -340,49 +633,49 @@
         <span class="card-icon">&#128197;</span>
         <div class="card-name">Online időpontfoglaló</div>
         <div class="card-desc">Naptár + időpont választás + email visszaigazolás.</div>
-        <div class="card-price">+98 000 Ft</div>
+        <div class="card-price">+98 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="120000" data-name="AI chatbot (alap)" onclick="toggleCard(this)">
         <span class="card-icon">&#129302;</span>
         <div class="card-name">AI chatbot (alap)</div>
         <div class="card-desc">Automatikus GYIK válaszadó a weboldalon, 0-24 elérhető.</div>
-        <div class="card-price">+120 000 Ft</div>
+        <div class="card-price">+120 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="310000" data-name="AI chatbot (haladó + lead gyűjtés)" onclick="toggleCard(this)">
         <span class="card-icon">&#129504;</span>
         <div class="card-name">AI chatbot (haladó)</div>
         <div class="card-desc">GYIK + időpontkérés + lead gyűjtés + CRM-be küldés automatikusan.</div>
-        <div class="card-price">+310 000 Ft</div>
+        <div class="card-price">+310 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="80000" data-name="Email automatizáció (welcome)" onclick="toggleCard(this)">
         <span class="card-icon">&#9993;</span>
         <div class="card-name">Email automatizáció</div>
         <div class="card-desc">Feliratkozás &#8594; 3 automatikus welcome email sorozat.</div>
-        <div class="card-price">+80 000 Ft</div>
+        <div class="card-price">+80 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="80000" data-name="Blog rendszer (haladó CMS)" onclick="toggleCard(this)">
         <span class="card-icon">&#128221;</span>
         <div class="card-name">Blog rendszer</div>
         <div class="card-desc">Admin felület ahol magad írsz cikkeket + képfeltöltés + SEO — Google rangsor javítás.</div>
-        <div class="card-price">+80 000 Ft</div>
+        <div class="card-price">+80 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="35000" data-name="Haladó képgaléria" onclick="toggleCard(this)">
         <span class="card-icon">&#128444;</span>
         <div class="card-name">Haladó galéria</div>
         <div class="card-desc">Kategóriaszűrő + előtte-utána slider + videó támogatás.</div>
-        <div class="card-price">+35 000 Ft</div>
+        <div class="card-price">+35 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="300000" data-name="Egyszerű webshop (max 20 termék)" onclick="toggleCard(this)">
         <span class="card-icon">&#128722;</span>
         <div class="card-name">Webshop</div>
         <div class="card-desc">Terméklista + kosár + bankkártyás fizetés (SimplePay/Stripe).</div>
-        <div class="card-price">+300 000 Ft-tól</div>
+        <div class="card-price">+300 000 Ft-tól <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="120000" data-name="Étterem asztalfoglalás" onclick="toggleCard(this)">
         <span class="card-icon">&#127861;</span>
         <div class="card-name">Asztalfoglalás</div>
         <div class="card-desc">Dátum + idő + fő szám + speciális kérés + visszaigazolás.</div>
-        <div class="card-price">+120 000 Ft</div>
+        <div class="card-price">+120 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
     </div>
   </div>
@@ -401,25 +694,25 @@
         <span class="card-icon">&#128241;</span>
         <div class="card-name">QR kódos étlap (alap)</div>
         <div class="card-desc">Mobilon megnyíló digitális étlap, QR kóddal, frissíthető admin.</div>
-        <div class="card-price">+40 000 Ft</div>
+        <div class="card-price">+40 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="150000" data-name="QR kódos asztali rendelés (teljes)" onclick="toggleCard(this)">
         <span class="card-icon">&#127869;</span>
         <div class="card-name">QR kódos rendelés (teljes)</div>
         <div class="card-desc">QR &#8594; asztalszám azonosítás &#8594; rendelés a konyhába &#8594; visszaigazolás a vendég telefonjára.</div>
-        <div class="card-price">+150 000 Ft</div>
+        <div class="card-price">+150 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="80000" data-name="Hűségprogram / kuponrendszer" onclick="toggleCard(this)">
         <span class="card-icon">&#127873;</span>
         <div class="card-name">Hűségprogram / kuponrendszer</div>
         <div class="card-desc">Kuponkód generálás, beváltás, kedvezmény logika a weboldalon.</div>
-        <div class="card-price">+80 000 Ft</div>
+        <div class="card-price">+80 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="80000" data-name="WhatsApp Business automatizáció (haladó)" onclick="toggleCard(this)">
         <span class="card-icon">&#128172;</span>
         <div class="card-name">WhatsApp Business (haladó)</div>
         <div class="card-desc">Automatikus válaszok + értékesítési flow + termékkatalógus.</div>
-        <div class="card-price">+80 000 Ft</div>
+        <div class="card-price">+80 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
     </div>
   </div>
@@ -438,37 +731,37 @@
         <span class="card-icon">&#129534;</span>
         <div class="card-name">Számlázás alap integráció</div>
         <div class="card-desc">Szamlazz.hu VAGY Billingo API bekötés, manuális trigger, 1 számla sablón.</div>
-        <div class="card-price">+80 000 Ft</div>
+        <div class="card-price">+80 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="60000" data-name="Automatikus számlázás (fizetés után)" onclick="toggleCard(this)">
         <span class="card-icon">&#9889;</span>
         <div class="card-name">Automatikus számlázás</div>
         <div class="card-desc">Fizetés után &#8594; automatikusan generál NAV-kompatibilis számlát.</div>
-        <div class="card-price">+60 000 Ft</div>
+        <div class="card-price">+60 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="80000" data-name="Visszatérő számlázás (előfizetés)" onclick="toggleCard(this)">
         <span class="card-icon">&#128260;</span>
         <div class="card-name">Visszatérő számlázás</div>
         <div class="card-desc">Havi automatikus számla generálás + fizetési emlékeztető.</div>
-        <div class="card-price">+80 000 Ft</div>
+        <div class="card-price">+80 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="40000" data-name="Díjbekérő + fizetési emlékeztető" onclick="toggleCard(this)">
         <span class="card-icon">&#128232;</span>
         <div class="card-name">Díjbekérő + emlékeztető</div>
         <div class="card-desc">Lejárt határidő &#8594; automatikus email emlékeztető az ügyfélnek.</div>
-        <div class="card-price">+40 000 Ft</div>
+        <div class="card-price">+40 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="30000" data-name="Könyvelő export (automatikus)" onclick="toggleCard(this)">
         <span class="card-icon">&#128202;</span>
         <div class="card-name">Könyvelő export</div>
         <div class="card-desc">Havi automatikus export a könyvelőnek (Excel/CSV).</div>
-        <div class="card-price">+30 000 Ft</div>
+        <div class="card-price">+30 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="200000" data-name="Egyedi számlázási logika (komplex)" onclick="toggleCard(this)">
         <span class="card-icon">&#128295;</span>
         <div class="card-name">Egyedi számlázási logika</div>
         <div class="card-desc">Több termékvonal, kedvezmények, NAV riport — konzultáció alapján.</div>
-        <div class="card-price">200 000 Ft-tól</div>
+        <div class="card-price">200 000 Ft-tól <span class="vat">+ ÁFA</span></div>
       </div>
     </div>
   </div>
@@ -487,37 +780,37 @@
         <span class="card-icon">&#127912;</span>
         <div class="card-name">Egyedi UI/UX dizájn</div>
         <div class="card-desc">Egyedi elrendezés, a te arculatodhoz igazítva.</div>
-        <div class="card-price">+30 000 Ft</div>
+        <div class="card-price">+30 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="60000" data-name="Prémium dizájn (animációk)" onclick="toggleCard(this)">
         <span class="card-icon">&#10024;</span>
         <div class="card-name">Prémium dizájn</div>
         <div class="card-desc">Parallax scroll, animált elemek, hover effektek — WOW élmény.</div>
-        <div class="card-price">+60 000 Ft</div>
+        <div class="card-price">+60 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="35000" data-name="Alap SEO" onclick="toggleCard(this)">
         <span class="card-icon">&#128269;</span>
         <div class="card-name">Alap SEO</div>
         <div class="card-desc">Meta title, description, H1-H6, alt textek, sitemap — megtalálnak Google-ön.</div>
-        <div class="card-price">+35 000 Ft</div>
+        <div class="card-price">+35 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="80000" data-name="Haladó SEO + kulcsszó kutatás" onclick="toggleCard(this)">
         <span class="card-icon">&#128640;</span>
         <div class="card-name">Haladó SEO</div>
         <div class="card-desc">Kulcsszó kutatás + schema markup + sebesség optimalizálás.</div>
-        <div class="card-price">+80 000 Ft</div>
+        <div class="card-price">+80 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="50000" data-name="Lokális SEO csomag" onclick="toggleCard(this)">
         <span class="card-icon">&#128205;</span>
         <div class="card-name">Lokális SEO csomag</div>
         <div class="card-desc">Google My Business + helyi kulcsszavak + térkép + schema.</div>
-        <div class="card-price">+50 000 Ft</div>
+        <div class="card-price">+50 000 Ft <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="39000" data-name="Többnyelvű (+1 nyelv)" onclick="toggleCard(this)">
         <span class="card-icon">&#127760;</span>
         <div class="card-name">Többnyelvű (+1 nyelv)</div>
         <div class="card-desc">Extra nyelvi verzió (pl. angol) nyelvváltó gombbal.</div>
-        <div class="card-price">+39 000 Ft / nyelv</div>
+        <div class="card-price">+39 000 Ft / nyelv <span class="vat">+ ÁFA</span></div>
       </div>
     </div>
   </div>
@@ -542,25 +835,25 @@
         <span class="card-icon">&#128172;</span>
         <div class="card-name">Mikro karbantartás</div>
         <div class="card-desc">Havi 1 módosítás, 72 órán belül válasz, biztonsági frissítés.</div>
-        <div class="card-price">14 900 Ft<small>/hó</small></div>
+        <div class="card-price">14 900 Ft<small>/hó</small> <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="0" data-monthly="29000" data-name="Alap karbantartás" onclick="selectRadio(this)">
         <span class="card-icon">&#128737;</span>
         <div class="card-name">Alap karbantartás</div>
         <div class="card-desc">Havi 2 módosítás, biztonsági frissítés, backup, uptime monitoring.</div>
-        <div class="card-price">29 000 Ft<small>/hó</small></div>
+        <div class="card-price">29 000 Ft<small>/hó</small> <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="0" data-monthly="79000" data-name="Aktív karbantartás" onclick="selectRadio(this)">
         <span class="card-icon">&#9881;</span>
         <div class="card-name">Aktív karbantartás</div>
         <div class="card-desc">Havi 8 módosítás, új szekciók, A/B tesztek, havi riport.</div>
-        <div class="card-price">79 000 Ft<small>/hó</small></div>
+        <div class="card-price">79 000 Ft<small>/hó</small> <span class="vat">+ ÁFA</span></div>
       </div>
       <div class="card" data-price="0" data-monthly="150000" data-name="Teljes menedzsment" onclick="selectRadio(this)">
         <span class="card-icon">&#128081;</span>
         <div class="card-name">Teljes menedzsment</div>
         <div class="card-desc">Korlátlan módosítás, havi stratégia, SEO, hirdetés kezelés.</div>
-        <div class="card-price">150 000 Ft<small>/hó</small></div>
+        <div class="card-price">150 000 Ft<small>/hó</small> <span class="vat">+ ÁFA</span></div>
       </div>
     </div>
   </div>
@@ -578,26 +871,93 @@
   <div class="summary-inner">
     <div class="summary-prices">
       <div class="summary-block">
-        <label>Egyszeri költség</label>
+        <label>Egyszeri költség (nettó)</label>
         <div class="amount onetime" id="totalOnetime">0 Ft</div>
+        <div class="summary-vat" id="totalVat">+ 0 Ft ÁFA (27%)</div>
         <div class="summary-discount" id="discountText" style="display:none"></div>
       </div>
       <div class="summary-block">
-        <label>Havi díj</label>
+        <label>Havi díj (nettó)</label>
         <div class="amount monthly" id="totalMonthly">0 Ft/hó</div>
+        <div class="summary-vat" id="monthlyVat">+ 0 Ft ÁFA/hó</div>
       </div>
       <div class="summary-block">
-        <label>Kiválasztott modulok</label>
+        <label>Modulok</label>
         <div class="amount onetime" id="moduleCount" style="font-size:18px">0 db</div>
       </div>
     </div>
-    <button class="cta-btn" onclick="requestQuote()">Kérem az ajánlatot &#8594;</button>
+    <button class="cta-btn" onclick="openModal()">Kérem az ajánlatot &#8594;</button>
+  </div>
+</div>
+
+<!-- AJÁNLATKÉRŐ MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+
+    <div id="formState">
+      <h3>Ajánlatkérés</h3>
+      <p class="modal-subtitle">Töltsd ki az alábbi adatokat, és 24 órán belül személyre szabott ajánlatot küldünk.</p>
+
+      <!-- Kiválasztott elemek -->
+      <div class="modal-selected">
+        <div class="modal-selected-title">Kiválasztott modulok</div>
+        <div class="modal-selected-list" id="modalItems"></div>
+      </div>
+
+      <!-- Ár összesítő -->
+      <div class="modal-price-summary">
+        <div>
+          <div class="price-label">Becsült nettó ár</div>
+          <div class="price-val" id="modalPrice">0 Ft</div>
+        </div>
+        <div style="text-align:right">
+          <div class="price-label">Bruttó (ÁFA-val)</div>
+          <div class="price-val" id="modalPriceBrutto" style="font-size:16px; color:var(--muted)">0 Ft</div>
+          <div class="price-vat">27% ÁFA</div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="form-group">
+        <label>Név <span class="req">*</span></label>
+        <input type="text" id="formName" placeholder="Pl. Kovács Anna" oninput="validateForm()">
+      </div>
+      <div class="form-group">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" id="formEmail" placeholder="pl. anna@cegnev.hu" oninput="validateForm()">
+        <div class="form-error" id="emailError">Kérjük, adj meg egy érvényes email címet.</div>
+      </div>
+      <div class="form-group">
+        <label>Telefonszám <span class="req">*</span></label>
+        <input type="tel" id="formPhone" placeholder="+36 30 123 4567" oninput="validateForm()">
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="checkAszf" onchange="validateForm()">
+        <label for="checkAszf">Elfogadom az <a href="#" onclick="event.preventDefault()">Általános Szerződési Feltételeket (ÁSZF)</a> <span class="req">*</span></label>
+      </div>
+      <div class="checkbox-group" style="margin-bottom:20px">
+        <input type="checkbox" id="checkGdpr" onchange="validateForm()">
+        <label for="checkGdpr">Elfogadom az <a href="#" onclick="event.preventDefault()">Adatvédelmi Tájékoztatót</a> és hozzájárulok adataim kezeléséhez <span class="req">*</span></label>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitQuote()">Kérem az ajánlatot &#8594;</button>
+    </div>
+
+    <div id="successState" class="success-state" style="display:none">
+      <div class="check-icon">&#10003;</div>
+      <h3>Ajánlatkérés elküldve!</h3>
+      <p>Köszönjük, <span id="successName"></span>!<br>A Scroll Digital csapata <strong>24 órán belül</strong> felveszi veled a kapcsolatot a megadott elérhetőségeken.</p>
+    </div>
   </div>
 </div>
 
 <script>
 let basePrice = 0;
 let monthlyPrice = 0;
+let finalTotal = 0;
+let finalMonthly = 0;
 
 function formatPrice(n) {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' Ft';
@@ -607,10 +967,8 @@ function selectRadio(card) {
   const grid = card.closest('.cards-grid');
   const group = grid.dataset.group;
   const wasSelected = card.classList.contains('selected');
-
   grid.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
   if (!wasSelected) card.classList.add('selected');
-
   if (group === 'base') {
     basePrice = card.classList.contains('selected') ? parseInt(card.dataset.price) : 0;
   }
@@ -628,7 +986,6 @@ function toggleCard(card) {
 function recalc() {
   let modulesTotal = 0;
   let moduleCount = 0;
-
   if (basePrice > 0) moduleCount++;
 
   document.querySelectorAll('.cards-grid:not(.radio) .card.selected').forEach(card => {
@@ -637,8 +994,6 @@ function recalc() {
   });
 
   const subtotal = basePrice + modulesTotal;
-
-  // Kedvezmény: 3+ = 5%, 5+ = 10%, 8+ = 15%
   const funcModules = document.querySelectorAll('.cards-grid:not(.radio) .card.selected').length;
   let discountPct = 0;
   if (funcModules >= 8) discountPct = 15;
@@ -648,7 +1003,6 @@ function recalc() {
   const discount = Math.round(subtotal * discountPct / 100);
   const total = subtotal - discount;
 
-  // Kombó kedvezmény (weboldal + retainer): -5% mindkettőből
   let hasRetainer = monthlyPrice > 0;
   let hasBase = basePrice > 0;
   let komboDiscount = 0;
@@ -658,11 +1012,13 @@ function recalc() {
     komboMonthlyDiscount = Math.round(monthlyPrice * 0.05);
   }
 
-  const finalTotal = total - komboDiscount;
-  const finalMonthly = monthlyPrice - komboMonthlyDiscount;
+  finalTotal = total - komboDiscount;
+  finalMonthly = monthlyPrice - komboMonthlyDiscount;
 
   document.getElementById('totalOnetime').textContent = formatPrice(finalTotal);
+  document.getElementById('totalVat').textContent = '+ ' + formatPrice(Math.round(finalTotal * 0.27)) + ' ÁFA (27%)';
   document.getElementById('totalMonthly').textContent = formatPrice(finalMonthly) + '/hó';
+  document.getElementById('monthlyVat').textContent = '+ ' + formatPrice(Math.round(finalMonthly * 0.27)) + ' ÁFA/hó';
   document.getElementById('moduleCount').textContent = moduleCount + ' db';
 
   const discountEl = document.getElementById('discountText');
@@ -671,7 +1027,7 @@ function recalc() {
     discountLines.push('-' + discountPct + '% modul kedvezmény (-' + formatPrice(discount) + ')');
   }
   if (komboDiscount > 0) {
-    discountLines.push('-5% kombó kedvezmény (-' + formatPrice(komboDiscount) + ' egyszer, -' + formatPrice(komboMonthlyDiscount) + '/hó)');
+    discountLines.push('-5% kombó (-' + formatPrice(komboDiscount) + ' + -' + formatPrice(komboMonthlyDiscount) + '/hó)');
   }
   if (discountLines.length > 0) {
     discountEl.style.display = 'block';
@@ -681,7 +1037,7 @@ function recalc() {
   }
 }
 
-function requestQuote() {
+function openModal() {
   const items = [];
   document.querySelectorAll('.card.selected').forEach(card => {
     items.push(card.dataset.name);
@@ -690,11 +1046,69 @@ function requestQuote() {
     alert('Válassz legalább egy elemet a konfigurátorból!');
     return;
   }
-  alert(
-    'Ajánlatkérés elküldve!\n\n' +
-    'Kiválasztott elemek:\n\u2022 ' + items.join('\n\u2022 ') +
-    '\n\nA Scroll Digital csapata 24 órán belül felveszi veled a kapcsolatot.'
-  );
+
+  document.getElementById('modalItems').innerHTML = items.map(i => '&#8226; ' + i).join('<br>');
+  document.getElementById('modalPrice').textContent = formatPrice(finalTotal);
+  document.getElementById('modalPriceBrutto').textContent = formatPrice(Math.round(finalTotal * 1.27));
+
+  // Reset form
+  document.getElementById('formState').style.display = 'block';
+  document.getElementById('successState').style.display = 'none';
+  document.getElementById('formName').value = '';
+  document.getElementById('formEmail').value = '';
+  document.getElementById('formPhone').value = '';
+  document.getElementById('checkAszf').checked = false;
+  document.getElementById('checkGdpr').checked = false;
+  document.getElementById('submitBtn').classList.remove('enabled');
+  document.getElementById('emailError').style.display = 'none';
+
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+function validateForm() {
+  const name = document.getElementById('formName').value.trim();
+  const email = document.getElementById('formEmail').value.trim();
+  const phone = document.getElementById('formPhone').value.trim();
+  const aszf = document.getElementById('checkAszf').checked;
+  const gdpr = document.getElementById('checkGdpr').checked;
+
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const emailEl = document.getElementById('formEmail');
+  const emailError = document.getElementById('emailError');
+
+  if (email.length > 0 && !emailValid) {
+    emailError.style.display = 'block';
+  } else {
+    emailError.style.display = 'none';
+  }
+
+  const allValid = name.length > 0 && emailValid && phone.length >= 6 && aszf && gdpr;
+  const btn = document.getElementById('submitBtn');
+  if (allValid) {
+    btn.classList.add('enabled');
+  } else {
+    btn.classList.remove('enabled');
+  }
+}
+
+function submitQuote() {
+  const btn = document.getElementById('submitBtn');
+  if (!btn.classList.contains('enabled')) return;
+
+  const name = document.getElementById('formName').value.trim();
+  document.getElementById('successName').textContent = name;
+  document.getElementById('formState').style.display = 'none';
+  document.getElementById('successState').style.display = 'block';
 }
 
 recalc();
